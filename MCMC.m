@@ -1,7 +1,7 @@
 function [sample_final,M_PROB] = MCMC( sample , y , x , run_number , randwidth  ,Model_number)
 
 
-M_PROB=[0,0,0];    %为了记录数据
+M_PROB=[0,0,0];    %For record the p(m|y)
 I=[0,0,1,0,0,1,1,1];   % 4 model
 
 for t=1:run_number
@@ -32,6 +32,8 @@ sample=[sample;zeros(1,9)];
    
   end
 
+ %------------------------     simulate m   -----------------------------
+  
   for jj=1:Model_number-1
       M_prob(jj)=likeli_fun(sample(end,2*jj-1:2*jj),I(2*jj-1:2*jj),y,x)/(likeli_fun(sample(end,1:2),I(1:2),y,x)+likeli_fun(sample(end,3:4),I(3:4),y,x)+likeli_fun(sample(end,5:6),I(5:6),y,x)+likeli_fun(sample(end,7:8),I(7:8),y,x));
   end
