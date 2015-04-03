@@ -1,8 +1,8 @@
 function [sample_final,M_PROB] = MCMC( sample , y , x , run_number , randwidth  ,Model_number)
 
 
-M_PROB=[0,0,0];
-I=[0,0,1,0,0,1,1,1];
+M_PROB=[0,0,0];    %为了记录数据
+I=[0,0,1,0,0,1,1,1];   % 4 model
 
 for t=1:run_number
     
