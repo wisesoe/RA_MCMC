@@ -1,7 +1,8 @@
-function [sample_final I1 I2] = MCMC( y,x,m )
+function [sample_final I1 I2] = MCMC( y,x,m,width )
 %y: observed data
 %x: vector of all possible x
 %m: chain length
+%width: 
 
 
 %% initiate
@@ -23,7 +24,7 @@ for t=m0:m
     I=ones(1,2);
 
 %% for beta1
-    rnum = unifrnd(a(1)-1,a(1)+1);
+    rnum = unifrnd(a(1)-width,a(1)+width);
     b(1)=rnum;b(2)=a(2);
 
 % to decide whether beta2 is included    
@@ -33,7 +34,7 @@ for t=m0:m
  
      I1=[I1;I];   % record
     
-    if log(rand) < con_prob_beta1(b,I,y,x) - con_prob_beta1(a,I,y,x)
+    if log(rand) < log_con_prob_beta1(b,I,y,x) - log_con_prob_beta1(a,I,y,x)
         a(1)=b(1);
     end
 
@@ -50,7 +51,7 @@ for t=m0:m
     
     I2=[I2;I];
      
-    if log(rand) < con_prob_beta2(b,I,y,x) - con_prob_beta2(a,I,y,x)
+    if log(rand) < log_con_prob_beta2(b,I,y,x) - log_con_prob_beta2(a,I,y,x)
         a(2)=b(2);
     end
     

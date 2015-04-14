@@ -8,17 +8,15 @@ regress(y,x)
 
 
 %%  run MCMC
-m=1000;
-width=10;
+m=500;
+width_max=10;
 
-run_time=50;       % run repeatedly
-
-[result_total,I1,I2]=MCMC(y,x,m,width);
+[result_total,I1,I2]=MCMC(y,x,m,1);
 
 
-for  t=2:run_time 
+for  t=2:width_max 
 
-[result,I1,I2]=MCMC(y,x,m,width);
+[result,I1,I2]=MCMC(y,x,m,t);
 
 result_total=[result_total,result];
 
